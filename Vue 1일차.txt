@@ -62,5 +62,7 @@ node.js 에서 유용한 라이브러리를 통해 원본 js 파일들로부터 
 요즘은 웬만하면 이렇게 하는 추세이다.
 (근데 대부분 cdn으로 예제를 보여주고 있어서 교재가 썩 좋지 않다...)
 
-일단 교재대로 먼저 독주하기는 할건데, 공부하기에는 아래 링크의 사이트가 더 좋다.
-https://joshua1988.github.io/vue-camp/vue/instance.html
+일단 교재대로 먼저 독주하기는 할건데, 공부하기에는 아래 링크의 사이트가 더 좋고, 기본적으로 레퍼런스를 늘 참고하자
+
+Cracking Vue.js: https://joshua1988.github.io/vue-camp/vue/instance.html
+Vue 레퍼런스 : https://kr.vuejs.org/v2/guide/

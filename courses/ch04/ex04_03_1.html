@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4. List Rendering v-for</title>
+    <link href="../../vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <script src="../../vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="../../vendor/vue/vue.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            new Vue({
+                el: '#app',
+                data: {
+                    stories: [
+                        "차를 부숴먹었어요!",
+                        "어제 누가 내 가방을 훔쳐갔어!",
+                        "누가 내 초콜릿을 먹었어...",
+                    ]
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <div id="app">
+        <div class="container text-center">
+            <h1>v-for 반복문 예제</h1>
+        </div>
+        <div class="container my-5">
+            <ul class="list-group">
+                <li v-for="story in stories" class="list-group-item">
+                    <figure>
+                        <blockquote class="blockquote">
+                            <p>{{ story }}</p>
+                        </blockquote>
+                        <figcaption class="blockquote-footer">
+                            Someone said
+                        </figcaption>
+                    </figure>
+                </li>
+            </ul>
+        </div>
+        <div class="container">
+            <pre>{{ $data }}</pre>
+        </div>
+    </div>
+    
+</body>
+</html>
