@@ -25,9 +25,9 @@
     <div id="app">
         <div class="container">
             <template v-if="!msg1">
-                <h1>빨랑 내용을 입력해 멍청아!</h1>
-                <h2>책 저자가 잘못한 거야? 번역이 개병신인거야?</h2>
-                <h2>ㅅㅂ 책 존나 안좋네</h2>
+                <h1>아래 입력란에 내용을 입력하세요.</h1>
+                <h3>책 저자가 잘못한 거야? 번역이 잘못된건지?</h2>
+                <h3>교재가 토 나올 정도로 훌륭하지 않습니다.</h2>
             </template>
             <div class="row">
                 <pre>{{ $data }}</pre>
@@ -37,7 +37,7 @@
                 <textarea class="form-control" v-model="msg1"></textarea>
             </div>
             <div class="row justify-content-end">
-                <button class="btn btn-primary col-3" v-show="msg1">내용이 비어 있으면 이 버튼은 사라집니다.</button>
+                <button class="btn btn-primary col-md-3 my-3" v-show="msg1">내용이 비어 있으면 이 버튼은 사라집니다.</button>
             </div>
         </div>
     </div> 
