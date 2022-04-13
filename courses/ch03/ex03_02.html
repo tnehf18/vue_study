@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3. Directive v-if</title>
+    <link href="../../vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <script src="../../vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="../../vendor/vue/vue.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            new Vue({
+                el: "#app",
+                data : {
+                    msg1: "Our king is dead!!",
+                    msg2: "'\$' 기호가 붙어서 Json 형식으로 표기합니다. 교재는 고작 번역한 것이 전부이므로 순서가 이상하게 설명되어 있으므로 헷갈릴 수 있습니다."
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <div id="app">
+        <div class="container">
+            <template v-if="!msg1">
+                <h1>아래 입력란에 내용을 입력하세요.</h1>
+                <h3>책 저자가 잘못한 거야? 번역이 잘못된건지?</h2>
+                <h3>교재가 토 나올 정도로 훌륭하지 않습니다.</h2>
+            </template>
+            <div class="row">
+                <pre>{{ $data }}</pre>
+            </div>
+
+            <div class="row">
+                <textarea class="form-control" v-model="msg1"></textarea>
+            </div>
+            <div class="row justify-content-end">
+                <button class="btn btn-primary col-md-3 my-3" v-show="msg1">내용이 비어 있으면 이 버튼은 사라집니다.</button>
+            </div>
+        </div>
+    </div> 
+    
+</body>
+</html>
