@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.5 _연습 문제</title>
+    <link href="../../vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <script src="../../vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="../../vendor/vue/vue.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            new Vue({
+                el: "#app",
+                data : {
+                    username: "",
+                    usergender: ""
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <div id="app">
+        <div class="container">
+            <h1 class="display-2" v-if="username && usergender == 'male' ">Hello, Minster {{username}}</h1>
+            <h1 class="display-2" v-else-if="username && usergender == 'female' ">Hello, Miss {{username}}</h1>
+
+            <div class="row">
+                <pre>{{ $data }}</pre>
+            </div>
+
+            <div class="row form-floating">
+                <select class="form-select" id="usergender" aria-label="Default select example" v-model="usergender">
+                    <option value="" selected>choose your gender</option>
+                    <option value="male">male</option>
+                    <option value="female">female</option>
+                </select>
+                <label for="usergender">Enter your gender:</label>
+            </div>
+            <div class="row form-floating">
+                <input class="form-control" type="text" id="username" placeholder="Enter your name" v-model="username" />
+                <label for="username">Enter your username:</label>
+            </div>
+        </div>
+    </div> 
+    
+</body>
+</html>
