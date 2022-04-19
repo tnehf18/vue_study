@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5. _연습 문제</title>
+    <link href="../../vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <script src="../../vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="../../vendor/vue/vue.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            new Vue({
+                el: '#app',
+
+                data: {
+                    candidates: [
+                        {
+                            name: "Mr.Black",
+                            votes: 0,
+                        },
+                        {
+                            name: "Mr.Pink",
+                            votes: 0,
+                        },
+                        {
+                            name: "Mr.White",
+                            votes: 0,
+                        },
+                        {
+                            name: "Mr.Brown",
+                            votes: 0,
+                        },
+                    ]
+                },
+
+                computed: {
+                    mayor() {
+                        var mayor = this.candidates.reduce((previous, current) => { return previous.votes > current.votes ? previous : current; });
+                        return mayor.votes > 0 ? mayor : null;
+                    }
+                },
+
+                methods: {
+                    reset() {
+                        this.candidates.forEach(function (candidate) {
+                            candidate.votes = 0;
+                        });
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <div id="app">
+        <div class="container my-5 text-center">
+            <h1>시장 후보</h1>
+        </div>
+        <div v-if="mayor" class="container my-5">
+            <h1>{{ mayor.name }} 가 당선되었습니다!</h1>
+        </div>
+        <div class="container my-5">
+            <ul class="list-group">
+                <li v-for="(candidate, index) in candidates" class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-1">
+                            {{ index }}.
+                        </div>
+                        <div class="col-md-2">
+                            {{ candidate.name }}
+                        </div>
+                        <div class="col-md-2">
+                            {{ candidate.votes }} 표
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-primary" @click="candidate.votes++">투표하기</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="container my-5">
+            <input class="col-md-3" placeholder="delete 를 입력하면 초기화 됩니다." @keyup.delete="reset" />
+        </div>
+    </div>
+    
+</body>
+</html>

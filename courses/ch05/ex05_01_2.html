@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5. Event Handling</title>
+    <link href="../../vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <script src="../../vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="../../vendor/vue/vue.js"></script>
+    <script type="text/javascript">
+        function jsFunc() {
+            // 일반 JS 문법을 통한, DOM 제어
+            alert("jsFunc");
+        }
+
+        window.onload = function() {
+            new Vue({
+                el: '#app',
+
+                data: {
+                },
+
+                methods: {
+                    vueFunc() {
+                        // vue 메소드, Vue 인스턴스 내에서의 가상 DOM 제어
+                        alert("vueFunc");
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <div id="app">
+        <div class="container text-center">
+            <h1>가상 DOM 제어</h1>
+        </div>
+        <div class="container mt-5">
+            <button class="btn btn-primary" @click="vueFunc">
+                Vue 메소드
+            </button>
+            <button class="btn btn-secondary" onclick="jsFunc()">
+                Js 함수
+            </button>
+        </div>
+    </div>
+    
+</body>
+</html>

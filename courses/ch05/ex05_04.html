@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5. Event Handling computed</title>
+    <link href="../../vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <script src="../../vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="../../vendor/vue/vue.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            new Vue({
+                el: '#app',
+
+                data: {
+                    msg: "안녕하세요",
+                    num: 1,
+                    firstName: 'Foo',
+                    lastName: 'Bar'
+                },
+
+                watch: {
+                    firstName(newVal, oldVal) {
+                        console.log(newVal);
+                        this.firstName = newVal;
+                    },
+                    lastName(newVal, oldVal) {
+                        console.log(newVal);
+                        this.lastName = newVal;
+                    },
+                },
+
+                computed: {
+                    /* 중복 불가.
+                    msg() {
+                        return this.msg;
+                    },
+                    */
+                    reversedMsg() {
+                        return this.msg.split('').reverse().join('');
+                    },
+                    now() {
+                        return Date.now();
+                    },
+                    fullName: {
+                        // getter
+                        get: function () {
+                            return this.firstName + ' ' + this.lastName
+                        },
+                        // setter
+                        set: function (newValue) {
+                            var names = newValue.split(' ')
+                            this.firstName = names[0]
+                            this.lastName = names[names.length - 1]
+                        }
+                    }
+                },
+
+                methods: {
+
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <div id="app">
+        <div class="container text-center">
+            <h1>computed</h1>
+        </div>
+        <div class="container my-5">
+            <pre>{{ $data }}</pre>
+        </div>
+        <div class="container my-5">
+            <input type="text" class="form-control" v-model="msg" />
+            <input class="form-control" v-model.number="num" />
+            <div id="example">
+                {{ msg.split('').reverse().join('') }}
+            </div>
+            <p>
+                {{ reversedMsg }}
+            </p>
+            <p>
+                {{ now }}
+            </p>
+            <input class="form-control" v-model="firstName" />
+            <input class="form-control" v-model="lastName" />
+            <input class="form-control" v-model.lazy="fullName" />
+        </div>
+    </div>
+    
+</body>
+</html>

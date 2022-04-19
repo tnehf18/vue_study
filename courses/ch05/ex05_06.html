@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4. _연습 문제</title>
+    <link href="../../vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <script src="../../vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="../../vendor/vue/vue.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            new Vue({
+                el: '#app',
+                data: {
+                    userInfo: {
+                        name: "Alex",
+                        weight: 65,
+                        height: 170,
+                        eyeColor: "Brown",
+                        favoriteFood: "바나나",
+                        showFirstRRN: '',
+                        showLastRRN: '',
+                        inputFirstRRN: [],
+                        inputLastRRN: [],
+                    }
+                },
+
+                watch: {
+                    "userInfo.showFirstRRN" : function(newVal, oldVal) {
+                        console.log("주민등록번호 앞자리", newVal, oldVal);
+                        
+                        this.userInfo.inputFirstRRN = newVal.replace(/[^0-9]/g, '').split('');
+                        this.userInfo.showFirstRRN = this.userInfo.inputFirstRRN.join('');
+                        console.log("inputFirstRRN", this.userInfo.inputFirstRRN);
+                    },
+                    "userInfo.showLastRRN" : function(newVal, oldVal) {
+                        console.log("주민등록번호 뒷자리", newVal, oldVal);
+                        
+                        var temp = new Array(7);
+                        this.userInfo.inputLastRRN.map(function(v, i) {temp[i] = v});
+                        for(var i=0; i < temp.length; i++) {
+                            if(/^[0-9]$/g.test(newVal[i])) {
+                                if(i < 1 || !temp[i]) temp[i] = newVal[i];
+                            }
+                            else if(!newVal[i]) {
+                                temp[i] = newVal[i];
+                            }
+                        }
+                        this.userInfo.inputLastRRN = temp.filter(function(v) {return v});
+                        
+                        var coverStr = this.userInfo.inputLastRRN.join('').replace(/(?<=.{1})./gi, "*");
+                        this.userInfo.showLastRRN = coverStr;
+                        console.log("inputLastRRN", this.userInfo.inputLastRRN);
+                    }
+                },
+
+                methods: {
+                    bindFirstRRN: function bindFirstRRN(event) {
+                        this.userInfo.showFirstRRN = event.target.value;
+                    },
+                    bindLastRRN: function bindLastRRN(event) {
+                        this.userInfo.showLastRRN = event.target.value;
+                    },
+                },
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <div id="app">
+        <div class="container text-center">
+            <h1>사용자 정보</h1>
+        </div>
+
+        <div class="container">
+            <form method="POST">
+                <label class="control-label col-lg-2">이름</label>
+                <div class="col-md-6 form-group">
+                    <input type="text" class="form-control focus" name="username" maxlength="20" placeholder="홍길동"  />
+                </div>
+                <label class="control-label col-lg-2">주민등록번호</label>
+                <div class="row">
+                    <div class="col-md-3 form-group">
+                        <input type="text" :value="userInfo.showFirstRRN" class="form-control focus" name="fst_rrn" maxlength="6" placeholder="990101" @input="bindFirstRRN($event)" />
+                    </div>
+                    -
+                    <div class="col-md-3 form-group">
+                        <input type="text" :value="userInfo.showLastRRN" class="form-control focus" name="lst_rrn" maxlength="7" placeholder="1234567" @input="bindLastRRN($event)" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>

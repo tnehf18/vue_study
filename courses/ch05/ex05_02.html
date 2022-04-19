@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5. Event Handling Modifiers</title>
+    <link href="../../vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <script src="../../vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="../../vendor/vue/vue.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            new Vue({
+                el: '#app',
+
+                data: {
+                    int_a : 1,
+                    int_b : 2,
+                    result : null,
+                    operator : "+",
+                },
+
+                methods: {
+                    calc() {
+                        switch (this.operator) {
+                            case "+":
+                                this.result = this.int_a + this.int_b;
+                                break;
+                            case "-":
+                                this.result = this.int_a - this.int_b;
+                                break;
+                            case "*":
+                                this.result = this.int_a * this.int_b;
+                                break;
+                            case "/":
+                                this.result = this.int_a / this.int_b;
+                                break;
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <div id="app">
+        <div class="container text-center">
+            <h1>수식어 Modifiers</h1>
+        </div>
+        <div class="container mt-5">
+            <form class="form-inline">
+                <!--ㅣ 입력을 숫자로 파싱하기 위해 특별한 한정자인 number를 사용합니다. -->
+                <div class="input-group">
+                    <input class="form-control" v-model.number="int_a" />
+                    <input class="form-control" list="calcOptions" v-model="operator">
+                    <datalist id="calcOptions">
+                        <option value="+">
+                        <option value="-">
+                        <option value="*">
+                        <option value="/">
+                    </datalist>
+                    <input type="text" class="form-control" v-model.number="int_b" />
+                    <button type="submit" class="btn btn-outline-secondary col-md-1" @click.prevent="calc">Calc</button>
+                </div>
+            </form>
+            <div class="container my-3">
+                <h2> Result: {{ int_a }} {{ operator }} {{ int_b }} = {{ result }}</h2>
+            </div>
+            <div class="container my-3">
+                <pre>{{ $data }}</pre>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
