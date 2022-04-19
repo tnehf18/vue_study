@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5. Event Handling Modifiers</title>
+    <link href="../../vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <script src="../../vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="../../vendor/vue/vue.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            new Vue({
+                el: '#app',
+
+                data: {
+                    event: null,
+                    keyCode : null
+                },
+
+                methods: {
+                    displayKey(event) {
+                        console.log(event);
+                        this.event = event;
+                        this.keyCode = event.which || event.keyCode;
+                    },
+                    withCtrl(event) {
+                        console.log(event);
+                        this.event = event;
+                        this.keyCode = event.which || event.keyCode;
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <div id="app">
+        <div class="container text-center">
+            <h1>수식어 Modifiers</h1>
+        </div>
+        <div class="container">
+            <pre>{{ $data }}</pre>
+        </div>
+        <div class="container my-5">
+            <label for="input_key">아무키나 입력하시오</label>
+            <input type="text" class="form-contorl" name="input_key" placeholder="아무키" @keyup="displayKey" />
+        </div>
+        <div class="container my-5">
+            <label for="input_key">ctrl 키와 함께 입력하시오</label>
+            <input type="text" class="form-contorl" name="input_" placeholder="ctrl키" @keyup.prevent.ctrl="withCtrl" />
+        </div>
+    </div>
+    
+</body>
+</html>
